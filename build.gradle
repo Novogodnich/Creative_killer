@@ -1,0 +1,90 @@
+plugins {
+    // Версия 1.14 идеально работает на Gradle 9.2+ и нативно знает про Minecraft 1.21.11
+    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    // Чисто серверный мод, никаких splitEnvironmentSourceSets()
+    mods {
+        "creative_ciller" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    // 1. Правильный URL репозитория Fabric
+    maven { url = "https://maven.fabricmc.net/" }
+
+    // 2. ОБЯЗАТЕЛЬНО: без этого репозитория зависимости API не скачаются
+    mavenCentral()
+
+    gradlePluginPortal()
+}
+
+dependencies {
+    // Ваши хардкод-версии под 1.21.11
+    minecraft "com.mojang:minecraft:1.21.11"
+    mappings "net.fabricmc:yarn:1.21.11+build.4:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.16.10"
+
+    // 3. Реальная, существующая в Maven версия Fabric API для Майнкрафта 1.21.11
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.6+1.21.11"
+}
+
+
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", "1.21.11"
+    inputs.property "loader_version", "0.16.10"
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": "1.21.11",
+                "loader_version": "0.16.10"
+    }
+}
+
+// Выставляем таргет компиляции Java 21, чтобы сервер Майнкрафта принял этот мод
+def targetJavaVersion = 21
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release.set(targetJavaVersion)
+    }
+}
+
+// НАСТРОЙКА TOOLCHAIN ПОД JAVA 25
+java {
+    toolchain {
+        // Gradle будет использовать Java 25 для сборщика
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archives_base_name}" }
+    }
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name
+            from components.java
+        }
+    }
+}
+

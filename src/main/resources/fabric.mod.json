@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "creative_ciller",
+  "version": "${version}",
+  "name": "Creative Ciller",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/creative_ciller/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": [
+      "ru.rootpoint.creative_ciller.client.Creative_cillerDataGenerator"
+    ],
+    "main": [
+      "ru.rootpoint.creative_ciller.Creative_ciller"
+    ]
+  },
+  "mixins": [
+    "creative_ciller.mixins.json",
+    {
+      "config": "creative_ciller.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
