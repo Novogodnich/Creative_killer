@@ -26,6 +26,6 @@ Since the mod operates on the server side (**Server-side only**), players **don'
 Join the server with operator rights and run the vanilla item-giving command (in versions 1.21+, the format of old NBT tags has been changed to a component system):
 
 ```text
-/give @s netherite_sword[custom_name='{"text":"Creative Killer","italic":false}'] 1
+/give @s netherite_sword[custom_name='Creative Killer'] 1
 ```
 _After that, any hit with this sword on a player (in any game mode) will instantly send the target to the respawn screen_.
