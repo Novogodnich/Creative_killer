@@ -1,5 +1,4 @@
 plugins {
-    // Версия 1.14 идеально работает на Gradle 9.2+ и нативно знает про Minecraft 1.21.11
     id 'fabric-loom' version '1.14-SNAPSHOT'
     id 'maven-publish'
 }
@@ -12,7 +11,6 @@ base {
 }
 
 loom {
-    // Чисто серверный мод, никаких splitEnvironmentSourceSets()
     mods {
         "creative_ciller" {
             sourceSet sourceSets.main
@@ -21,22 +19,18 @@ loom {
 }
 
 repositories {
-    // 1. Правильный URL репозитория Fabric
     maven { url = "https://maven.fabricmc.net/" }
 
-    // 2. ОБЯЗАТЕЛЬНО: без этого репозитория зависимости API не скачаются
     mavenCentral()
 
     gradlePluginPortal()
 }
 
 dependencies {
-    // Ваши хардкод-версии под 1.21.11
     minecraft "com.mojang:minecraft:1.21.11"
     mappings "net.fabricmc:yarn:1.21.11+build.4:v2"
     modImplementation "net.fabricmc:fabric-loader:0.16.10"
 
-    // 3. Реальная, существующая в Maven версия Fabric API для Майнкрафта 1.21.11
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.6+1.21.11"
 }
 
@@ -55,7 +49,6 @@ processResources {
     }
 }
 
-// Выставляем таргет компиляции Java 21, чтобы сервер Майнкрафта принял этот мод
 def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
@@ -64,10 +57,8 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
-// НАСТРОЙКА TOOLCHAIN ПОД JAVA 25
 java {
     toolchain {
-        // Gradle будет использовать Java 25 для сборщика
         languageVersion = JavaLanguageVersion.of(25)
     }
     withSourcesJar()

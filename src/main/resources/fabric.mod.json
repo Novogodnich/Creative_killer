@@ -1,32 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "creative_ciller",
-  "version": "${version}",
-  "name": "Creative Ciller",
+  "id": "creative_killer",
+  "version": "1.1",
+  "name": "Creative Killer",
   "description": "",
   "authors": [],
   "contact": {},
   "license": "LGPL-3.0",
-  "icon": "assets/creative_ciller/icon.png",
+  "icon": "assets/img.png",
   "environment": "server",
   "entrypoints": {
-    "fabric-datagen": [
-      "ru.rootpoint.creative_ciller.client.Creative_cillerDataGenerator"
-    ],
     "main": [
-      "ru.rootpoint.creative_ciller.Creative_ciller"
+      "ru.rootpoint.creative_ciller.Creative_killer"
     ]
   },
   "mixins": [
-    "creative_ciller.mixins.json",
-    {
-      "config": "creative_ciller.client.mixins.json",
-      "environment": "client"
-    }
+    "creative_ciller.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "1.21.11"
   }
 }
