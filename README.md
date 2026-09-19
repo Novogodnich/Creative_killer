@@ -1,6 +1,6 @@
 # Server Creative Killer (Fabric)
 
-**Server Creative Killer** — a lightweight, exclusively **server-side** mod for Minecraft 1.21.1 that adds a precision administration tool. It allows server operators to instantly eliminate troublemakers or test game mechanics while completely ignoring Creative Mode, immortality effects, and third-party modifications.
+**Server Creative Killer** — a lightweight, exclusively **server-side** mod for Minecraft 1.21.11 that adds a precision administration tool. It allows server operators to instantly eliminate troublemakers or test game mechanics while completely ignoring Creative Mode, immortality effects, and third-party modifications.
 
 Since the mod operates on the server side (**Server-side only**), players **don't need to download anything** — they can join the server from a completely vanilla client.
 
