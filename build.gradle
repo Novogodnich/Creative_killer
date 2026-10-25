@@ -19,7 +19,7 @@ loom {
 }
 
 repositories {
-    maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://sonatype.org" }
 
     mavenCentral()
 
@@ -30,6 +30,8 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation 'me.lucko:fabric-permissions-api:0.7.0'
+    include 'me.lucko:fabric-permissions-api:0.7.0'
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
@@ -37,7 +39,7 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "minecraft_version", "1.21.11"
+    inputs.property "minecraft_version", "26.3"
     inputs.property "loader_version", "0.16.10"
     filteringCharset "UTF-8"
 
