@@ -19,7 +19,7 @@ loom {
 }
 
 repositories {
-    maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://sonatype.org" }
 
     mavenCentral()
 
@@ -30,6 +30,8 @@ dependencies {
     minecraft "com.mojang:minecraft:1.21.11"
     mappings "net.fabricmc:yarn:1.21.11+build.4:v2"
     modImplementation "net.fabricmc:fabric-loader:0.16.10"
+    modImplementation 'me.lucko:fabric-permissions-api:0.6.1'
+    include 'me.lucko:fabric-permissions-api:0.6.1'
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.6+1.21.11"
 }
