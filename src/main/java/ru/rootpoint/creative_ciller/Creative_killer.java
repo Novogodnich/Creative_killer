@@ -27,10 +27,14 @@ public class Creative_killer implements ModInitializer {
             try {
                 config = mapper.readValue(configPath.toFile(), Config.class);
             } catch (IOException ignored) {
-                config = new Config(false, false);
+                config = new Config(false, true);
+                LogService.error("Error reading config file. Using default values.");
             }
         }
-        else config = new Config(false, false);
+        else {
+            config = new Config(false, true);
+            LogService.warning("Config file not found. Using default values.");
+        }
 
         AttackEntityCallback.EVENT.register((player, world, hand, entity, ignored) -> {
             if (config.activeAllMode()) {
@@ -47,12 +51,14 @@ public class Creative_killer implements ModInitializer {
                             if (target instanceof net.minecraft.world.entity.player.Player targetPlayer) {
                                 targetPlayer.kill(serverLevel);
                                 targetPlayer.discard();
+                                LogService.info(player.getName() + " killed " + targetPlayer.getName() + " without Creative Killer");
                                 return InteractionResult.SUCCESS;
                             } else {
                                 target.kill(serverLevel);
+                                LogService.info(player.getName() + " killed entity " + target.getName() + " without Creative Killer");
                                 return InteractionResult.SUCCESS;
                             }
-                        }
+                        } else LogService.info(player.getName() + " does not have rights to kill " + target.getName() + " without Creative Killer");
                     }
                     else {
                         if (!(world instanceof ServerLevel serverLevel)) throw new RuntimeException();
@@ -62,12 +68,14 @@ public class Creative_killer implements ModInitializer {
                             if (target instanceof net.minecraft.world.entity.player.Player targetPlayer) {
                                 targetPlayer.kill(serverLevel);
                                 targetPlayer.discard();
+                                LogService.info(player.getName() + " killed " + targetPlayer.getName() + " without Creative Killer");
                                 return InteractionResult.SUCCESS;
                             } else {
                                 target.kill(serverLevel);
+                                LogService.info(player.getName() + " killed entity " + target.getName() + " without Creative Killer");
                                 return InteractionResult.SUCCESS;
                             }
-                        }
+                        } else LogService.info(player.getName() + " does not have rights to kill " + target.getName() + " without Creative Killer");
                     }
                 }
             }
@@ -93,16 +101,18 @@ public class Creative_killer implements ModInitializer {
                             if (server.getPlayerList().isOp(player.nameAndId()) || canKillAll.join() || canKillPlayer.join()) {
                                 targetPlayer.kill(serverLevel);
                                 targetPlayer.discard();
+                                LogService.info(player.getName() + " killed " + targetPlayer.getName() + " with Creative Killer");
                                 return InteractionResult.SUCCESS;
-                            }
+                            } else LogService.info(player.getName() + " does not have rights to kill " + targetPlayer.getName() + " with Creative Killer");
                         }
                         else {
                             if (world instanceof net.minecraft.server.level.ServerLevel serverLevel) {
                                 MinecraftServer server = serverLevel.getServer();
                                 if (server.getPlayerList().isOp(player.nameAndId()) || canKillAll.join() || canKillMob.join()) {
                                     target.kill(serverLevel);
+                                    LogService.info(player.getName() + " killed entity " + target.getName() + " with Creative Killer");
                                     return InteractionResult.SUCCESS;
-                                }
+                                } else LogService.info(player.getName() + " does not have rights to kill entity " + target.getName() + " with Creative Killer");
                             }
                         }
                     }
