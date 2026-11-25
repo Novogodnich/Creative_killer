@@ -1,4 +1,4 @@
-# Server Creative Killer (Fabric)
+# Creative Killer
 
 **Server Creative Killer** is a **server-side** mod for Minecraft 1.21.11([Secutity updates only](https://github.com/Novogodnich/Creative_killer/issues/2)) and 26.3.
 It adds an administration tool. The tool allows server operators to instantly eliminate troublemakers or test game mechanics while completely ignoring Creative Mode, immortality effects, and third-party modifications.
@@ -7,7 +7,7 @@ Since this is a server mod, **players don't need to download anything**.
 
 ---
 
-## 🚀 Key Features
+## Features
 
 * **Full Creative Mode Bypass:** Standard Minecraft damage ignores players in Creative. This mod bypasses this limitation at the server level.
 * **Ignoring Immortality Mods:** Instead of dealing standard damage, the code uses a hard entity removal method (`discard()`), which prevents totems, custom armor, or third-party "absolute invulnerability" effects from triggering.
@@ -19,7 +19,7 @@ Since this is a server mod, **players don't need to download anything**.
 
 ---
 
-## 🛠 Installation and Usage
+## Installation and Usage
 
 You can just download it, but if you want hardcore...
 
@@ -42,8 +42,7 @@ After that, hitting an entity with this sword will activate Creative Killer, pro
 If `active_all_mode` is enabled in the config, any item held by a permitted player becomes a Creative Killer. No special sword is required — a regular hit with anything (a stick, a block, a fist) will instantly eliminate the target.
 
 ---
-
-## ⚙️ Configuration
+## Configuration
 
 The config file is located at `config/creative_killer.json` and is created automatically on first launch. If the file is missing or invalid, defaults are used.
 
@@ -62,8 +61,7 @@ The config file is located at `config/creative_killer.json` and is created autom
 ```
 
 ---
-
-## 🔑 Permissions
+## Permissions
 
 Creative Killer supports the Fabric Permissions API.
 
@@ -81,6 +79,11 @@ The general permission grants access to both player and mob targets. The specifi
 The `creative_killer.killWithAnyItem` permission is only relevant in `active_all_mode` and is checked separately from the sword permissions.
 
 **OPs retain access to Creative Killer** (unless `permissions_for_ops_needed` is set to `true`). Regular players need to have permission to activate it.
+
+### Singleplayer
+Singleplayer compatibility has not been tested with this mod and is not recommended for use, though you are certainly free to try it. If you do decide to play with this mod in singleplayer, all the provided instructions still apply. Should you encounter any issues, please [open an issue on GitHub](https://github.com/Novogodnich/Creative_killer/issues/new).
+
+
 
 ---
 
